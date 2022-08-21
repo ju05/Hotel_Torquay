@@ -1,0 +1,18 @@
+<body>
+    {% extends 'partials/base_subpages.html' %}
+    
+        {% block content%}
+    
+    
+        <h1>Check Availability</h1>
+        <form method="post">
+        {%csrf_token%}        
+            <br>
+            {{form.as_p}}
+            <br>
+            <button type="submit"> Check Availability</button>
+        </form>           
+    
+       
+        {% endblock content %}
+    </body>

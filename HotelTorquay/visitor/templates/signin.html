@@ -1,0 +1,21 @@
+<div>
+    {% extends 'partials/base_subpages.html' %}
+</div> 
+<body>
+    {% block content%}  
+        <h1>SignIn</h1>
+        <form method = 'post'>
+            {%csrf_token%}
+            {% for field in form%}
+            <br>
+            {{field.label_tag}}
+            <br>
+            {{field}}
+            <br>
+            {% endfor %}
+            <button type="submit"> Sign In </button>
+        </form>
+    
+    
+    {% endblock content %}
+</body>

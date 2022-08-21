@@ -1,0 +1,18 @@
+<body>
+    {% extends 'partials/base_subpages.html' %}
+    
+        {% block content%}
+    
+    <div>
+        <h1>Rooms</h1>
+        {%csrf_token%}
+        
+            <br>
+            {{rooms_list}}
+            <br>
+        
+            
+    </div> 
+       
+        {% endblock content %}
+</body>
