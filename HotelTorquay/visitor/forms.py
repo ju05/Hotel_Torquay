@@ -3,12 +3,16 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from functools import partial
-from .models import Booking
+from .models import Booking, Contact
 from .widgets import DatePickerInput
 from datetime import date
 
+class SignUpForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'username', 'password1', 'password2')
 
-class AvailabilityForm(forms.Form):
+class AvailabilityForm(forms.ModelForm):
     room_categories=(
         ('STA','STANDARD'),
         ('COS','COSY'),
@@ -17,21 +21,21 @@ class AvailabilityForm(forms.Form):
         ('LUX','DELUXE'),
     )
     room_category = forms.ChoiceField(choices=room_categories, required=True)
-    persons = forms.IntegerField()
-    check_in = forms.DateTimeField(required=True,
-                                   input_formats=['%d/%m/%Y'],
-                                   widget=forms.DateInput(attrs={'type': 'date'}))
-    check_out = forms.DateTimeField(required=True,
-                                    input_formats=['%d/%m/%Y'],
-                                    widget=forms.DateInput(attrs={'type': 'date'}))
-
-class SignUpForm(UserCreationForm):
     class Meta:
-        model = User
-        fields = ('first_name', 'last_name', 'username', 'password1', 'password2')
+        model = Booking
+        fields = ['check_in', 'check_out', 'room_category']
+        widgets = {
+            'check_in': forms.SelectDateWidget,
+            'check_out': forms.SelectDateWidget,
+        }
 
-class ContactForm(forms.Form):
-    full_name = forms.CharField(max_length=100)
-    email = forms.EmailField(required=True)
-    phone_number = forms.IntegerField()
-    message = forms.Textarea()
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = Contact
+        fields = "__all__"
+       
+    
+class BookingForm(forms.ModelForm):
+    class Meta:
+        model = Booking
+        fields = "__all__"

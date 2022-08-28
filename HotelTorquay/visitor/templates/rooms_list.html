@@ -1,14 +1,22 @@
 <body>
-    {% extends 'partials/base_subpages.html' %}
+    {% extends 'partials/base.html' %}
     
         {% block content%}
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
     
     <div>
         <h1>Rooms</h1>
         {%csrf_token%}
         
             <br>
-            {{rooms_list}}
+            {{rooms_list}}       
+            
             <br>
         
             

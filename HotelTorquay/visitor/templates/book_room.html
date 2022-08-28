@@ -1,0 +1,33 @@
+<body>
+    {% extends 'partials/base.html' %}
+    
+        {% block content%}
+
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    
+    <div>
+        <h1>Book the Room</h1>
+        
+            <br>
+            {{available_rooms}}
+            
+            You choose:
+            {{room}}
+            <form method="post">
+            {%csrf_token%}
+            {{book_form.as_table}}
+            <button type="submit"> Book </button>
+        </form>
+            <br>
+        
+            
+    </div> 
+       
+        {% endblock content %}
+</body>

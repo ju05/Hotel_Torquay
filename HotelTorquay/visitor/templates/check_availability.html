@@ -1,17 +1,29 @@
 <body>
-    {% extends 'partials/base_subpages.html' %}
+    {% extends 'partials/base.html' %}
     
         {% block content%}
-    
-    
-        <h1>Check Availability</h1>
-        <form method="post">
-        {%csrf_token%}        
-            <br>
-            {{form.as_p}}
-            <br>
-            <button type="submit"> Check Availability</button>
-        </form>           
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Check Availability</h1>
+                    <form method="post">                                 
+                        {%csrf_token%}
+                        {% for field in form%}
+                        <br>
+                        {{field.label_tag}}
+                        <br>
+                        {{field}}
+                        <br>
+                        {% endfor %}                        
+                
+                        <button type="submit" class="book_btn">Check Availability</button>
+                    </form>                      
+                </div>
+            </div>
+        </div>
+    </section>
+                                                  
     
        
         {% endblock content %}

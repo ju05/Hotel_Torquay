@@ -1,0 +1,18 @@
+<body>
+    {% extends 'partials/base.html' %}
+    
+        {% block content%}
+    
+    <div>
+        <h1>Book Confirmation</h1>
+        {%csrf_token%}
+            <br>
+            
+            
+            <p> Your book was confirmed for:</p>
+            {{confirmation}}       
+            <br>  
+            
+    </div>        
+        {% endblock content %}
+</body>

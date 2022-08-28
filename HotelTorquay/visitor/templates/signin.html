@@ -1,6 +1,15 @@
 <div>
-    {% extends 'partials/base_subpages.html' %}
+    {% extends 'partials/base.html' %}
 </div> 
+<header>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</header>
 <body>
     {% block content%}  
         <h1>SignIn</h1>
@@ -15,7 +24,7 @@
             {% endfor %}
             <button type="submit"> Sign In </button>
         </form>
-    
+        <a href="{% url 'signup' %}"><h2>SignUp</h2></a>    
     
     {% endblock content %}
 </body>

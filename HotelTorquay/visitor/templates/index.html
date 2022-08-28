@@ -21,7 +21,7 @@
       <!-- Responsive-->
       <link rel="stylesheet" href="static/css/responsive.css">
       <!-- fevicon -->
-      <link rel="icon" href="static/images/fevicon.png" type="image/gif" />
+      <link rel="icon" href="static/images/fevicon.png" type="image/gif"/>
       <!-- Scrollbar Custom CSS -->
       <link rel="stylesheet" href="static/css/jquery.mCustomScrollbar.min.css">
       <!-- Tweaks for older IEs-->
@@ -45,7 +45,7 @@
                      <div class="full">
                         <div class="center-desk">
                            <div class="logo">
-                              <a href="{url 'index.html'}"><img src="static/images/logopeq.png" alt="#" /></a>
+                              <a href="{url 'index.html'}"><img src="/static/images/logopeq.png" alt="HT" /></a>
                            </div>
                         </div>
                      </div>
@@ -64,17 +64,23 @@
                                  <a class="nav-link" href="{% url 'rooms_list' %}">Rooms</a>
                               </li>  
                               <li class="nav-item">
-                                 <a class="nav-link" href="#about">Testemonials</a>
+                                 <a class="nav-link" href="#testimonial">Testemonial</a>
                               </li>
                               <li class="nav-item">
                                  <a class="nav-link" href="#about">Gallery</a>
                               </li>                               
                               <li class="nav-item">
-                                 <a class="nav-link" href="{% url 'contact' %}">Contact us</a>
+                                 <a class="nav-link" href="#contact">Contact us</a>
                               </li>
                            </ul>
-                           <div class="sign_btn"><a href="{% url 'signin' %}">Sign in</a></div>
+                           {% if user.is_authenticated%}
+                           <div class="sign_btn"><a href="{% url 'signout' %}">SignOut</a></div>
                         </div>
+                           {% else %}
+                           <div class="sign_btn"><a href="{% url 'signin' %}">SignIn</a></div>
+                        </div>                    
+                           
+                           {% endif%}
                      </nav>
                   </div>
                </div>
@@ -101,34 +107,7 @@
          </div>
       </section>
       <!-- end banner -->
-      <!-- form_lebal -->
-      <section>
-         <div class="container">
-            <div class="row">
-               <div class="col-md-12">
-                  <form class="form_book">
-                     <div class="row">
-                        <div class="col-md-3">
-                           <form method="post"></form>                                 
-                                 {%csrf_token%}
-                                 {% for field in form%}
-                                 <br>
-                                 {{field.label_tag}}
-                                 <br>
-                                 {{field}}
-                                 <br>
-                                 {% endfor %}                           
-                        </div>
-                        <div class="col-md-3">
-                           <button type="submit" class="book_btn">Check Availability</button>
-                        </div>
-                     </div>
-                  </form>         
-               </div>
-            </div>
-         </div>
-      </section>
-      <!-- end form_lebal -->
+
       <!-- choose  section -->
       <div class="choose">
          <div class="container">
@@ -139,7 +118,7 @@
                         <h2><span class="text_norlam">Choose The Perfect</span> <br>Accommodation</h2>
                      </div>
                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit </p>
-                     <a class="read_more" href="">See the Rooms</a>
+                     <a class="read_more" href="{% url 'rooms_list' %}">See the Rooms</a>
                   </div>
                </div>
                <div class="col-md-6">
@@ -180,7 +159,7 @@
                         <h2><span class="text_norlam">Our Best </span> <br>Breakfast</h2>
                      </div>
                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit </p>
-                     <a class="read_more" href="#">Read More</a>
+                     <a class="read_more" href="#">More...</a>
                   </div>
                </div>
             </div>
@@ -209,7 +188,7 @@
       </div>
       <!-- end about -->
       <!-- testimonial -->
-      <div class="testimonial">
+      <div id = "testimonial" class="testimonial">
          <div class="container">
             <div class="row">
                <div class="col-md-12">
@@ -233,14 +212,14 @@
                                  <div class="row">
                                     <div class="col-md-6 margin_boot">
                                        <div class="test_box">
-                                          <h4>Mark jonson</h4>
+                                          <h4>Mark Manson</h4>
                                           <i><img src="static/images/te1.png" alt="#"/></i>
                                           <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour,</p>
                                        </div>
                                     </div>
                                     <div class="col-md-6">
                                        <div class="test_box">
-                                          <h4>Mac Du</h4>
+                                          <h4>Gal Gadot</h4>
                                           <i><img src="static/images/te1.png" alt="#"/></i>
                                           <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour,</p>
                                        </div>
@@ -255,14 +234,14 @@
                                  <div class="row">
                                     <div class="col-md-6 margin_boot">
                                        <div class="test_box">
-                                          <h4>Mark jonson</h4>
+                                          <h4>Yuval Harari</h4>
                                           <i><img src="static/images/te1.png" alt="#"/></i>
                                           <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour,</p>
                                        </div>
                                     </div>
                                     <div class="col-md-6">
                                        <div class="test_box">
-                                          <h4>Mac Du</h4>
+                                          <h4>Natalie Portman</h4>
                                           <i><img src="static/images/te1.png" alt="#"/></i>
                                           <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour,</p>
                                        </div>
@@ -277,14 +256,14 @@
                                  <div class="row">
                                     <div class="col-md-6 margin_boot">
                                        <div class="test_box">
-                                          <h4>Mark jonson</h4>
+                                          <h4>Neymar Junior</h4>
                                           <i><img src="static/images/te1.png" alt="#"/></i>
                                           <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour,</p>
                                        </div>
                                     </div>
                                     <div class="col-md-6">
                                        <div class="test_box">
-                                          <h4>Mac Du</h4>
+                                          <h4>Gisele Bundchen</h4>
                                           <i><img src="static/images/te1.png" alt="#"/></i>
                                           <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour,</p>
                                        </div>
@@ -319,27 +298,27 @@
                      </div>
                      <div class="cont">
                         <h3>Some persuasive phrase! </h3>
-                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour,</p>
+                        <ul>   
+
+                           <li>Sea Front, Torbay Road, Torquay</li>                           
+                           <li>0800 0055555  </li>
+                           <li> reservations@hoteltorquay.co.uk</li>
+
+                           
+                        </ul>
                      </div>
                   </div>
+                                  
                   <div class="col-md-6">
-                     <form id="request" class="main_form">
+                     <form id="request" class="main_form" method="post" action="/contact/">                        
                         <div class="row">
                            <div class="col-md-12 ">
-                              <input class="contactus" placeholder="Full Name" type="type" name="Full Name"> 
-                           </div>
-                           <div class="col-md-12">
-                              <input class="contactus" placeholder="Email" type="type" name="Email"> 
-                           </div>
-                           <div class="col-md-12">
-                              <input class="contactus" placeholder="Phone Number" type="type" name="Phone Number">                          
-                           </div>
-                           <div class="col-md-12">
-                              <textarea class="textarea" placeholder="Message" type="type" Message="Name">Message </textarea>
+                              {%csrf_token%}  
+                              {{contactform.as_p}}
                            </div>
                            <div class="col-sm-12">
-                              <button class="send_btn">Send</button>
-                           </div>
+                              <button class="send_btn" type="submit">Send</button>
+                           </div>                  
                         </div>
                      </form>
                   </div>
