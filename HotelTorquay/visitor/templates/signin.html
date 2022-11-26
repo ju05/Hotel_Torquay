@@ -1,16 +1,8 @@
-<div>
-    {% extends 'partials/base.html' %}
-</div> 
-<header>
-    {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-</header>
 <body>
+    <div>
+        {% extends 'partials/base.html' %}
+        {% include 'partials/navbar.html'%}
+    </div> 
     {% block content%}  
         <h1>SignIn</h1>
         <form method = 'post'>

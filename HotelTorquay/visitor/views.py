@@ -19,6 +19,8 @@ def index(request):
     context = {'form':AvailabilityForm, 'contactform': ContactForm}
     return render(request, 'index.html', context)  
 
+# -----------------------------------AUTHENTICATION--------------------------------------
+
 def signup(request):
     context = {'form':SignUpForm, 'contactform': ContactForm}
     if request.method =='POST':
@@ -65,6 +67,8 @@ def signout(request):
         logout(request)
     return redirect('signin')
 
+# -------------------------------------------------END_AUTHENTICATION---------------------------------
+# -------------------------------------------------CONTACT_FORM---------------------------------------
 def contact(request):
     if request.method == 'POST':
         print('enter to post')
@@ -78,9 +82,23 @@ def contact(request):
             return render(request, 'contact.html', {'contactform': ContactForm})
     return render(request, 'check_availability.html', {'rooms_list':Room.objects.all(),'contactform': ContactForm})
 
+
+# --------------------------------------------------------------VISITORS---------------------------------------
 def rooms_list(request):
     context = {'rooms_list':Room.objects.all(), 'contactform': ContactForm}
     return render(request, 'rooms_list.html', context)
+
+
+@login_required(login_url='signin')
+def book_room(user, room, check_in, check_out):
+    Booking.objects.create(
+        user_id = user.id,
+        room_id = room.id,
+        check_in = check_in,
+        check_out = check_out)
+
+    return redirect('book_confirmation')
+
 
 def bookings_list(request):
     context = {'bookings_list':Booking.objects.all(), 'contactform': ContactForm}
@@ -126,15 +144,6 @@ def booking_view(request):
 
     return render(request, 'check_availability.html' ,context)   
 
-@login_required(login_url='signin')
-def book_room(user, room, check_in, check_out):
-    Booking.objects.create(
-        user_id = user.id,
-        room_id = room.id,
-        check_in = check_in,
-        check_out = check_out)
-
-    return redirect('book_confirmation')
 
             
 
